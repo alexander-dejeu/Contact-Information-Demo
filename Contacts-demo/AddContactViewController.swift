@@ -9,9 +9,23 @@
 import UIKit
 
 
-class AddContactViewController: UIViewController {
+
+class AddContactViewController: UIViewController, ContactsTableViewControllerDelegate {
   
   @IBOutlet weak var nameTextField: UITextField!
+    
+    func getNewUser() -> String {
+        return nameTextField.text!
+    }
+    
+    func send(){
+        let notificationName: NSNotification.Name = NSNotification.Name(rawValue: "addContact")
+        let payload = ["name": nameTextField.text!]
+        
+        NotificationCenter.default.post(name: notificationName, object: self, userInfo: payload)
+    }
+
+    
   
   override func viewDidLoad() {
     super.viewDidLoad()
